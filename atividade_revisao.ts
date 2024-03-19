@@ -1,100 +1,155 @@
+abstract class Empresa {
+    constructor(
+        protected nome_empresa: string,
+        protected email_empresa: string,
+        protected telefone_empresa: string,
+        protected endereco_empresa: string) {
 
-class Empresa{
- nome_empresa: string;
- email_empresa:string;
- telefone_empresa:string;
-endereco_empresa:string;
-constructor(nome_empresa:string,email_empresa:string,telefone_empresa:string,endereco_empresa:string){
- this.nome_empresa=nome_empresa;
- this.email_empresa=email_empresa;
- this.endereco_empresa=endereco_empresa;
- this.telefone_empresa=telefone_empresa;
-}
+    }
+    mostrarDados() {
+        console.log('informaçao empresa')
+        console.log(` Nome Empresa: ${this.nome_empresa}`)
+        console.log(`email Empresa :${this.email_empresa}`)
+        console.log(`endereco:${this.endereco_empresa}`)
+        console.log(`telefone: ${this.telefone_empresa}`)
 
-}
-
-
-const empresa_1 new Empresa('CodeTech' )
-class  Projeto  {
-    nome_projeto: string ;
-     tipo_projeto:string
-     id_projeto:string;
-     Prazo_inicial: Date;
-     Prazo_final:Date;
-    constructor(nome_projeto: string, tipo_projeto: string,  id_projeto: string, prazo_incial :Date, Prazo_final:Date) {
-      console.log('informação do Projeto')
-      this.nome_projeto= nome_projeto ;
-      this.tipo_projeto=tipo_projeto;
-      this.id_projeto=id_projeto;
-      this.Prazo_inicial=prazo_incial;
-      this.Prazo_final=Prazo_final
-}
-}
-
-const  projeto1 = new Projeto (' projeto CodeTech', 'sistema de cadastro ',"PJ010202", new Date ('2024-03-19'), new Date ('2024-06-19'))
-
-
-console.log(projeto1)
-
-
-
-
-
-class Funcionario {
-id_funcionario: string;
-nome_funcionario: string;
-idade: number;
-equipe:string;
-endereco:string
-cargo: string
-constructor(id_funcionario:string,nome_funcionario:string, idade:number,equipe: string,endereco:string,cargo:string){
-console.log('informação do Funcionario')
-this.id_funcionario=id_funcionario;
-this.nome_funcionario= nome_funcionario;
-this.idade=idade;
-this.equipe=equipe;
-this.endereco=endereco
-this.cargo=cargo
-}
-
-}
-
-const Funcionario1= new Funcionario ('FN010202', "Diego",34,'Desenvolvimento','Rua pajuçara','Desenvolvedor')
-
-console.log (Funcionario1)
-
-
-
-class Status_tarefa {
-andamento_projeto: string 
-
-constructor(andamento_projeto:string){
-    this.andamento_projeto= andamento_projeto;
-}
+    }
 }
 
 
+class Projeto {
+    constructor(
+        protected nome_projeto: string,
+        protected tipo_projeto: string,
+        protected id_projeto: string,
+        protected prazo_inicial: Date,
+        protected prazo_final: Date) {
 
 
-const Status1 = new Status_tarefa('Fase incial')
-
-
-class Equipe{
-id_equipe: string;
-Tarefa_equipe: string;
-lider:string 
-
-
-constructor(id_equipe:string,tarefa_equipe:string,lider:string){
- console.log('informação equipe')
- this.id_equipe=id_equipe;
- this.Tarefa_equipe= tarefa_equipe
- this.lider=lider
-
+    }
+    mostrarDados() {
+        console.log('informaçao Projeto')
+        console.log(` Nome Projeto: ${this.nome_projeto}`)
+        console.log(`Tipo projeto:${this.tipo_projeto}`)
+        console.log(`Id Projeto:${this.id_projeto}`)
+        console.log(`prazo incial: ${this.prazo_inicial}`)
+        console.log(`prazo Final: ${this.prazo_final}`)
+    }
 }
+const projeto1 = new Projeto('Projeto CodeTech', 'Sistema de Cadastro', 'PJ010202', new Date('2024-03-19'), new Date('2024-06-19'));
 
+
+class Funcionario extends Projeto {
+    constructor(
+        protected id_funcionario: string,
+        protected nome_funcionario: string,
+        protected idade: number,
+        protected equipe: string,
+        protected endereco: string,
+        protected cargo: string,
+        protected nome_projeto: string,
+        protected tipo_projeto: string,
+        protected id_projeto: string,
+        protected prazo_inicial: Date,
+        protected prazo_final: Date) {
+        super(nome_projeto, tipo_projeto, id_projeto, prazo_inicial, prazo_final);
+
+
+    }
+    mostrarDados() {
+        console.log('Informação Funcionario')
+        console.log(` id Funcionario : ${this.id_funcionario}`)
+        console.log(`Nome Funcionario:${this.nome_funcionario}`)
+        console.log(`idade:${this.idade}`)
+        console.log(`equipe: ${this.equipe}`)
+        console.log(`endereco: ${this.endereco}`)
+        console.log(`cargo: ${this.cargo}`)
+    }
 }
+const funcionario1 = new Funcionario('FN09898', 'Fabio', 35, 'EQ098', 'rua pajuçara', 'Dsenvolvedor', 'projeto cadastro', 'banco de cadastro', 'PJ 0909', new Date('2024-03-18'), new Date('2024-06-20'))
+console.log(funcionario1);
 
-const equipe1 = new Equipe('EQ0203','desenvolver banco de Dados ', 'pedro')
+class Tarefa extends Funcionario {
 
-console.log (equipe1)
+
+    constructor(
+        protected andamento_projeto: string,
+        protected tipo_tarefa: string,
+        protected id_funcionario: string,
+        protected nome_funcionario: string,
+        protected idade: number,
+        protected equipe: string,
+        protected endereco: string,
+        protected cargo: string,
+        protected nome_projeto: string,
+        protected id_projeto: string,
+        protected prazo_inicial: Date,
+        protected prazo_final: Date
+    ) {
+        super(id_funcionario, nome_funcionario, idade, equipe, endereco, cargo, nome_projeto, tipo_tarefa, id_projeto, prazo_inicial, prazo_final)
+
+    }
+    mostrarDados() {
+        console.log('informaçao responsavel Tarefa')
+        console.log(` id Funcionario: ${this.id_funcionario}`)
+        console.log(`nome Funcionario:${this.nome_funcionario}`)
+        console.log(`idade:${this.idade}`)
+        console.log(`prazo incial: ${this.prazo_inicial}`)
+        console.log(`prazo Final: ${this.prazo_final}`)
+        console.log(`Equipe: ${this.equipe}`)
+        console.log(`Endereco: ${this.endereco}`)
+        console.log(`cargo: ${this.cargo}`)
+        console.log(`Nome Projeto: ${this.nome_projeto}`)
+        console.log(`Tipo Tarefa: ${this.tipo_tarefa}`)
+        console.log(`ID Projeto: ${this.id_projeto}`)
+    }
+}
+const status1 = new Tarefa('fase incial', 'Desenvolver Banco de dados', 'FN09898', 'Fabio', 35, 'EQ098', 'rua pajuçara', 'Desenvolvedor', 'projeto cadastro', 'pj0909', new Date('2024-03-18'), new Date('2024-06-18'));
+
+class Equipe extends Funcionario {
+
+
+    constructor(
+        protected id_equipe: string,
+        protected tarefa_equipe: string,
+        protected lider: string,
+        protected id_funcionario: string,
+        protected nome_funcionario: string,
+        protected idade: number,
+        protected equipe: string,
+        protected endereco: string,
+        protected cargo: string,
+        protected nome_projeto: string,
+        protected tipo_projeto: string,
+        protected id_projeto: string,
+        protected prazo_inicial: Date,
+        protected prazo_final: Date,
+
+    ) {
+
+        super(id_funcionario, nome_funcionario, idade, equipe, endereco, cargo, nome_projeto, tipo_projeto, id_projeto, prazo_inicial, prazo_final)
+
+
+
+    }
+
+    mostrarDados() {
+        console.log('informaçao responsavel Tarefa')
+        console.log(` id Funcionario: ${this.id_funcionario}`)
+        console.log(`nome Funcionario:${this.nome_funcionario}`)
+        console.log(`idade:${this.idade}`)
+        console.log(`prazo incial: ${this.prazo_inicial}`)
+        console.log(`prazo Final: ${this.prazo_final}`)
+        console.log(`Equipe: ${this.equipe}`)
+        console.log(`Endereco: ${this.endereco}`)
+        console.log(`cargo: ${this.cargo}`)
+        console.log(`Nome Projeto: ${this.nome_projeto}`)
+        console.log(`ID Projeto: ${this.id_projeto}`)
+
+    }
+}
+const equipe1 = new Equipe('EQ02', 'Desenvolver Banco de Dados', 'pedro', 'FN09898', 'joao', 35, 'Desenvolvedor banckend', 'Rua Brasil', 'Desenvolverdor', 'Projeto cadastro', 'cadastro', 'PJ0909', new Date('2024-03-18'), new Date('2024-06-18'));
+
+console.log(funcionario1.mostrarDados())
+console.log('======================================')
+console.log(projeto1.mostrarDados())
